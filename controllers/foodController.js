@@ -6,7 +6,7 @@ import fs from 'fs'
 
 const addFood = async (req, res) => {
 
-    let image_filename = `${req.filename}`
+    let image_filename = req.file ? req.file.filename : 'undefined';
 
     const food = new foodModel({
         name: req.body.name,

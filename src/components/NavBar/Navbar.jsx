@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState} from 'react'
 import './Navbar.css'
 import {assets} from '../../assets/assets'
 import { Link, useNavigate } from 'react-router-dom'
@@ -14,8 +14,9 @@ const Navbar = ({setShowLogin}) => {
 
     const logout = () => {
         localStorage.removeItem("token");
-        setToken("");
-        navigate("/")
+        setToken(null);
+        navigate("/");
+        setShowLogin(true);
     }
 
   return (
@@ -32,15 +33,17 @@ const Navbar = ({setShowLogin}) => {
             <img src={assets.search_icon} alt="" />
             <div className="navbar-search-icon">
                 <Link to='/cart'><img src={assets.basket_icon} alt='' /></Link>
-                <div className="dot"></div>
+                <div className={getTotalCartAmount()===0?"":"dot"}></div>
             </div>
+
+
             {!token? <button onClick={()=>setShowLogin(true)}>sign in</button>
             :<div className='navbar-profile'>
-                <img src={assets.profile_icon} alt='' />
+                <img src={assets.profile_icon} alt="" />
                 <ul className='nav-profile-dropdown'>
-                    <li><img src={assets.bag_icon} alt='' /></li>
+                    <li><img src={assets.bag_icon} alt='' /><p>Orders</p></li>
                     <hr />
-                    <li onClick={logout}><img  src={assets.logout_icon} alt=''/></li>
+                    <li onClick={logout}><img  src={assets.logout_icon} alt=''/><p>Logout</p></li>
                 </ul>
              </div>
             }

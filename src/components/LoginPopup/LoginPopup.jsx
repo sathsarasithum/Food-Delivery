@@ -21,9 +21,9 @@ const LoginPopup = ({setShowLogin}) => {
       setData(data =>({...data,[name]:value}))
     }
 
-    // useEffect(()=>{
-    //   console.log(data)
-    // },[data])
+    useEffect(()=>{
+      console.log(data)
+    },[data])
 
     const onLogin = async (event) => {
       event.preventDefault()
